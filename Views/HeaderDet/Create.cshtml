@@ -1,0 +1,242 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model TestMVCNetCore.Models.Header
+
+
+<h1>Crear</h1>
+
+<h4>Header</h4>
+<hr />
+
+<div class="container body-content">
+    <div class="row justify-content-center align-items-center" style="width:100%;">
+
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Header_Comment" class="control-label">Comentario</label>
+                        <input asp-for="Header_Comment" class="form-control" />
+                        <span asp-validation-for="Header_Comment" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="details">
+                <h2> Detalle </h2>
+
+                <table id="DetailTable" class="table-responsive-sm">
+                    <thead>
+                        <tr>
+
+
+                            <th>
+                                Opción
+                            </th>
+                            <th>
+                                N°
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Cant
+                            </th>
+                            <th>
+                                Calculado
+                            </th>
+
+
+                            <th style="width:60px;">
+                                <button id="btnAddDetailRow" type="button" class="btn btn-sm btn-success visible" onclick="AddNewRowItem(this)">
+                                    <i class="fa fa-plus" aria-hidden="true">Agregar</i>
+                                </button>
+
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Header_Detail.Count; i++)
+                        {
+                            <tr>
+
+                                <td>
+
+                                    @Html.DropDownListFor(x => x.Header_Detail[i].TypOption_Id,
+                                    new SelectList(ViewBag.ListTypeOption, "TypOption_Id", "TypOpt_Name", Model.Header_Detail.FirstOrDefault().TypOption_Id),
+                                    null,
+                                    new { @id = "ddlTypOption_Id", @class = "form-control" }
+                                    )
+
+
+                                </td>
+
+                                <td>
+                                    @Html.EditorFor(x => x.Header_Detail[i].Header_Detail_Number,
+                                   new { htmlAttributes = new { @class = "form-control" } }
+
+                                   )
+
+                                </td>
+
+                                <td>
+                                    @Html.EditorFor(x => x.Header_Detail[i].Header_Detail_Date,
+                                                new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @id = "textDate",
+                                                        @class = "form-control datepicker",
+                                                        @Value = Model.Header_Detail[i].Header_Detail_Date != null ?
+                                                Model.Header_Detail[i].Header_Detail_Date.Value.Date.ToString("yyyy-MM-dd") : null
+                                                    }
+                                                })
+
+
+                                </td>
+
+                                <td>
+                                    @Html.EditorFor(x => x.Header_Detail[i].Header_Detail_Quantity, new { htmlAttributes = new { @class = "form-control", @id = "text_Quantity" } })
+
+                                </td>
+                                <td>
+                                    @Html.EditorFor(x => x.Header_Detail[i].Header_Detail_Estimated, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </td>
+
+                                <td style="width:60px;">
+
+                                    <button id="btnRemove-@i" type="button" class="btn btn-sm btn-danger visible" onclick="DeleteRow(this)">
+                                        <i class="fa fa-trash" aria-hidden="true">Borrar</i>
+                                    </button>
+
+
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        ////////////Funciones nuevas///////////////
+        function AddNewRowItem(btn) {
+            var table;
+            table = document.getElementById('DetailTable');
+            var rows = table.getElementsByTagName('tr');
+            var rowOuterHtml = rows[rows.length - 1].outerHTML;
+
+            var lastrowIdx = rows.length - 2;
+
+
+            var nextrowIdx = eval(lastrowIdx) + 1;
+            //console.log(lastrowIdx);
+
+            rowOuterHtml = rowOuterHtml.replaceAll('_' + lastrowIdx + '_', '_' + nextrowIdx + '_');
+            rowOuterHtml = rowOuterHtml.replaceAll('[' + lastrowIdx + ']', '[' + nextrowIdx + ']');
+            rowOuterHtml = rowOuterHtml.replaceAll('-' + lastrowIdx, '-' + nextrowIdx);
+
+            var newRow = table.insertRow();
+            newRow.innerHTML = rowOuterHtml;
+
+            //////////////////////////
+
+            //let msg = newRow.cells[0].innerHTML + '*' + newRow.cells[1].innerHTML + '*' + newRow.cells[2].innerHTML + '*' + newRow.cells[3].innerHTML + '*' + newRow.cells[4].innerHTML;
+            //console.log("newRow: " + msg);
+            //showDataRowTd('DetailTable', lastrowIdx)
+            //showDataRowTd('DetailTable', nextrowIdx)
+
+            //console.log(newRow[2].cells[0].innerHTML);
+
+            //console.log(table.rows[2].cells[0].innerHTML);
+            //console.log(table.rows[2].cells[1].innerHTML);
+            //console.log(table.rows[2].cells[2].innerHTML);
+            //console.log(table.rows[2].cells[3].innerHTML);
+            //console.log(" newRow.innerHTML" + newRow.innerHTML);
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/HeaderDet/Create/calculateJson",
+            //    data: {   "numberValue": "1" },
+            //    success: function (response) {
+            //        $(response).each(function () {
+            //            //debugger;
+            //          
+            //        })
+            //    },
+            //    failure: function (response) {
+            //        alert(response.responseText);
+            //    },
+            //    error: function (response) {
+            //        alert(response.responseText);
+            //    }
+            //});
+            /////////////////////////
+
+            var x = document.getElementsByTagName('INPUT');
+
+            for (var cnt = 0; cnt < x.length; cnt++) {
+                if (x[cnt].type == "text" && x[cnt].id.indexOf('_' + nextrowIdx + '_') > 0) {
+                    x[cnt].value == '';
+                }
+                else if (x[cnt].type == "number" && x[cnt].id.indexOf('_' + nextrowIdx + '_') > 0) {
+                    x[cnt].value == 0;
+                }
+            }
+
+        }
+
+        function DeleteRow(btn) {
+
+            var table = document.getElementById('DetailTable');
+            var rows = table.getElementsByTagName('tr');
+
+            if (rows.length == 2) {
+                alert("Esta fila no puede ser eliminada.");
+                return;
+
+            }
+
+            $(btn).closest('tr').remove();
+        }
+
+        ////////////Fin Funciones nuevas///////////////
+
+
+    </script>
+
+
+}
