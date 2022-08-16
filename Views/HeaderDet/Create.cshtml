@@ -71,7 +71,7 @@
                                     @Html.DropDownListFor(x => x.Header_Detail[i].TypOption_Id,
                                     new SelectList(ViewBag.ListTypeOption, "TypOption_Id", "TypOpt_Name", Model.Header_Detail.FirstOrDefault().TypOption_Id),
                                     null,
-                                    new { @id = "ddlTypOption_Id", @class = "form-control" }
+                                    new { @id = "ddlTypOption_Id" + i, @class = "form-control select" }
                                     )
 
 
@@ -106,7 +106,7 @@
 
                                 </td>
                                 <td>
-                                    @Html.EditorFor(x => x.Header_Detail[i].Header_Detail_Estimated, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(x => x.Header_Detail[i].Header_Detail_Estimated, new { htmlAttributes = new { @class = "form-control ", @disabled = "disabled" } })
 
                                 </td>
 
@@ -148,9 +148,13 @@
 
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
     <script type="text/javascript">
+
+
+
 
         ////////////Funciones nuevas///////////////
         function AddNewRowItem(btn) {
@@ -172,7 +176,116 @@
             var newRow = table.insertRow();
             newRow.innerHTML = rowOuterHtml;
 
-            //////////////////////////
+
+            var x = document.getElementsByTagName('INPUT');
+
+            for (var cnt = 0; cnt < x.length; cnt++)
+            {
+                if (x[cnt].type == "text" && x[cnt].id.indexOf('_' + nextrowIdx + '_') > 0) {
+                    x[cnt].value == '';
+                }
+                else if (x[cnt].type == "number" && x[cnt].id.indexOf('_' + nextrowIdx + '_') > 0) {
+                    x[cnt].value == 0;
+                }
+            }
+
+            var tableTemp;
+            tableTemp = document.getElementById('DetailTable');
+
+            //for (fila of tableTemp.rows) {
+            //    fila.children[0].setAttribute("onchange","FuncionTemp(this)");
+            //    console.log(fila);
+            //}
+
+            for (var i = 0; i < tableTemp.rows.length; i++)
+            {
+                var fila = tableTemp.rows[i];
+                fila.children[0].setAttribute("onchange", "FuncionTemp(" + i + ")");
+
+                if (fila.children[3].children[0]) {
+                    fila.children[3].children[0].setAttribute("onchange", "FuncionCalcular(" + i + ")");
+                }
+
+                
+
+            }
+
+            //tableTemp.rows.forEach(function (fila) {
+            //    console.log(fila);
+            //})
+
+            
+
+        }
+
+        function FuncionCalcular(index) {
+
+            var selectOptNumber = document.getElementsByName("Header_Detail[" + (index - 1) + "].Header_Detail_Number")[0];
+            var OptNumberValue = selectOptNumber.value;
+
+
+            var selectOpt = document.getElementsByName("Header_Detail[" + (index - 1) + "].Header_Detail_Quantity")[0];
+            var value = selectOpt.value;
+
+            var selectOptEstimated = document.getElementsByName("Header_Detail[" + (index - 1) + "].Header_Detail_Estimated")[0];
+            selectOptEstimated.value = value * OptNumberValue;
+            //Header_Detail[1].Header_Detail_Estimated
+
+
+        }
+
+        function FuncionTemp(index) {
+            console.log("Nueva func");
+            console.log(index);
+
+
+            var table;
+            table = document.getElementById('DetailTable');
+
+            var selectOpt = document.getElementsByName("Header_Detail[" + (index - 1) + "].TypOption_Id")[0];
+
+            var value = selectOpt.value;//event.target.value;
+            if (value == 1) { //1	Numero
+                table.rows[index].children[2].children[0].setAttribute("disabled", "disabled");
+                table.rows[index].children[1].children[0].removeAttribute("disabled", "disabled");
+                table.rows[index].children[2].children[0].value="";
+            }
+            else if (value == 2) //2	Cumple
+            {
+                table.rows[index].children[2].children[0].removeAttribute("disabled", "disabled");
+                table.rows[index].children[1].children[0].setAttribute("disabled", "disabled");
+                table.rows[index].children[1].children[0].value = "";
+            }
+
+
+
+        }
+
+        function DeleteRow(btn) {
+
+            var table = document.getElementById('DetailTable');
+            var rows = table.getElementsByTagName('tr');
+
+            if (rows.length == 2) {
+                alert("Esta fila no puede ser eliminada.");
+                return;
+
+            }
+
+            $(btn).closest('tr').remove();
+        }
+
+            ////////////Fin Funciones nuevas///////////////
+
+
+    </script>
+
+
+}
+
+
+
+            @*//////////////////////////
 
             //let msg = newRow.cells[0].innerHTML + '*' + newRow.cells[1].innerHTML + '*' + newRow.cells[2].innerHTML + '*' + newRow.cells[3].innerHTML + '*' + newRow.cells[4].innerHTML;
             //console.log("newRow: " + msg);
@@ -194,7 +307,7 @@
             //    success: function (response) {
             //        $(response).each(function () {
             //            //debugger;
-            //          
+            //
             //        })
             //    },
             //    failure: function (response) {
@@ -204,39 +317,6 @@
             //        alert(response.responseText);
             //    }
             //});
-            /////////////////////////
-
-            var x = document.getElementsByTagName('INPUT');
-
-            for (var cnt = 0; cnt < x.length; cnt++) {
-                if (x[cnt].type == "text" && x[cnt].id.indexOf('_' + nextrowIdx + '_') > 0) {
-                    x[cnt].value == '';
-                }
-                else if (x[cnt].type == "number" && x[cnt].id.indexOf('_' + nextrowIdx + '_') > 0) {
-                    x[cnt].value == 0;
-                }
-            }
-
-        }
-
-        function DeleteRow(btn) {
-
-            var table = document.getElementById('DetailTable');
-            var rows = table.getElementsByTagName('tr');
-
-            if (rows.length == 2) {
-                alert("Esta fila no puede ser eliminada.");
-                return;
-
-            }
-
-            $(btn).closest('tr').remove();
-        }
-
-        ////////////Fin Funciones nuevas///////////////
+            /////////////////////////*@
 
 
-    </script>
-
-
-}

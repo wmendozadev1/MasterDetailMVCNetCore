@@ -23,8 +23,6 @@ E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.A
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Connections.Abstractions.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.CookiePolicy.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Cors.dll
-E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Cryptography.Internal.dll
-E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.DataProtection.Abstractions.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.DataProtection.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.AspNetCore.DataProtection.Extensions.dll
@@ -109,8 +107,6 @@ E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.E
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Hosting.Abstractions.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Hosting.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Http.dll
-E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Identity.Core.dll
-E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Identity.Stores.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Localization.Abstractions.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Localization.dll
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\refs\Microsoft.Extensions.Logging.Abstractions.dll
@@ -436,3 +432,15 @@ E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Head
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Headers\Index.cshtml.g.cs
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\HeaderDet\Create.cshtml.g.cs
 E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\HeaderDet\Index.cshtml.g.cs
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Serilog.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Account\AccessDenied.cshtml.g.cs
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Account\LoginSuccess.cshtml.g.cs
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
+E:\proyectos\mvc aspnet netcore\TestMVCNetCore\obj\Debug\net5.0\Razor\Views\Account\RegisterSuccess.cshtml.g.cs

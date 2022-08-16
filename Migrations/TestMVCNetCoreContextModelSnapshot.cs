@@ -19,6 +19,27 @@ namespace TestMVCNetCore.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("TestMVCNetCore.Models.Company", b =>
+                {
+                    b.Property<int>("Comp_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Comp_Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Comp_CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Comp_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Comp_Id");
+
+                    b.ToTable("Company");
+                });
+
             modelBuilder.Entity("TestMVCNetCore.Models.Header", b =>
                 {
                     b.Property<int>("Header_Id")
@@ -80,6 +101,76 @@ namespace TestMVCNetCore.Migrations
                     b.HasKey("TypOption_Id");
 
                     b.ToTable("TypeOption");
+                });
+
+            modelBuilder.Entity("TestMVCNetCore.Models.UserCompany", b =>
+                {
+                    b.Property<int>("UserComp_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Act_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AspNetUser_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Comp_Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("UserComp_Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UserComp_CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UserComp_DisableDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserComp_Id");
+
+                    b.ToTable("UserCompany");
+                });
+
+            modelBuilder.Entity("TestMVCNetCore.Models.UserCompanyVM", b =>
+                {
+                    b.Property<int>("UserComp_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Act_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Act_LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Act_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspNetUser_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Comp_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comp_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("UserComp_Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UserComp_CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UserComp_DisableDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserComp_Id");
+
+                    b.ToTable("UserCompanyVM");
                 });
 
             modelBuilder.Entity("TestMVCNetCore.Models.Header_Detail", b =>

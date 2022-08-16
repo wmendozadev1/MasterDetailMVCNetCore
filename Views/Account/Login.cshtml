@@ -1,0 +1,89 @@
+﻿
+@using Microsoft.AspNetCore.Http;
+
+@model TestMVCNetCore.Models.LoginViewModel
+
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+
+    ////get session
+    string name_Company = "";
+    int comp_Id = 0;
+
+    comp_Id = Convert.ToInt32(@Context.Session.GetInt32("Comp_Id"));
+    name_Company = Context.Session.GetString("Comp_Name");
+
+
+}
+
+
+
+<div class="d-flex justify-content-center">
+
+    <div class="login-box">
+        <div class="login-logo">
+            <a href=""><b>Admin </b>Login</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Inicio de Sesión</p>
+
+                <form asp-action="Login" asp-controller="Account">
+
+                    <div class="row">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+
+                    <div class="input-group mb-4">
+
+                        <input asp-for="Email" class="form-control" placeholder="Email" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                      
+                    </div>
+
+                    <div class="input-group mb-4">
+
+
+                        <input asp-for="Password" class="form-control" placeholder="Password" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @*</div>*@
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-primary" />
+                    </div>
+                </form>
+
+
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
